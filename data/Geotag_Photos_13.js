@@ -1,0 +1,1 @@
+var json_Geotag_Photos_13 = {"type":"FeatureCollection","name":"Geotag_Photos_13","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"NAME":"Sample Geotag","Folder":"D:\\PICTURES\\team-building-870x480.png"},"geometry":{"type":"Point","coordinates":[125.614301936397865,7.083116016095222]}}]}
