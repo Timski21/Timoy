@@ -32,19 +32,11 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="data/ph112414000_fh5yr_10m_1.js"></script>
-        <script src="data/Region_XI_2.js"></script>
-        <script src="data/Province_DavaodelSur_3.js"></script>
-        <script src="data/Buildings_Sulop_4.js"></script>
-        <script src="data/RoadNetworks_Sulop_5.js"></script>
-        <script src="data/Waterbodies_Sulop_6.js"></script>
-        <script src="data/DavaoCity_Brgys_7.js"></script>
-        <script src="data/Waterbodies_DavaoCity_8.js"></script>
-        <script src="data/RoadNetworks_DavaoCity_9.js"></script>
-        <script src="data/Buildings_DavaoCity_10.js"></script>
-        <script src="data/Bridges_DavaoCity_11.js"></script>
-        <script src="data/Photos_12.js"></script>
-        <script src="data/Geotag_Photos_13.js"></script>
+        <script src="data/FloodMapSulop_1.js"></script>
+        <script src="data/Buildings_Sulop_2.js"></script>
+        <script src="data/RoadNetworks_Sulop_3.js"></script>
+        <script src="data/Waterbodies_Sulop_4.js"></script>
+        <script src="data/Geotag_Photos_5.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -53,7 +45,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[6.592912364688965,125.35861406788608],[6.609572467632283,125.39126786965498]]);
+        }).fitBounds([[6.593699933191741,125.27885761143199],[6.66034034496501,125.4094728185076]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -83,51 +75,7 @@
         });
         layer_GoogleTerrainHybrid_0;
         map.addLayer(layer_GoogleTerrainHybrid_0);
-        function pop_ph112414000_fh5yr_10m_1(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-        }
-
-        function style_ph112414000_fh5yr_10m_1_0() {
-            return {
-                pane: 'pane_ph112414000_fh5yr_10m_1',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(114,155,111,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_ph112414000_fh5yr_10m_1');
-        map.getPane('pane_ph112414000_fh5yr_10m_1').style.zIndex = 401;
-        map.getPane('pane_ph112414000_fh5yr_10m_1').style['mix-blend-mode'] = 'normal';
-        var layer_ph112414000_fh5yr_10m_1 = new L.geoJson(json_ph112414000_fh5yr_10m_1, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_ph112414000_fh5yr_10m_1',
-            layerName: 'layer_ph112414000_fh5yr_10m_1',
-            pane: 'pane_ph112414000_fh5yr_10m_1',
-            onEachFeature: pop_ph112414000_fh5yr_10m_1,
-            style: style_ph112414000_fh5yr_10m_1_0,
-        });
-        bounds_group.addLayer(layer_ph112414000_fh5yr_10m_1);
-        map.addLayer(layer_ph112414000_fh5yr_10m_1);
-        function pop_Region_XI_2(feature, layer) {
+        function pop_FloodMapSulop_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -142,18 +90,20 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Code'] !== null ? autolinker.link(feature.properties['Reg_Code'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Var'] !== null ? autolinker.link(feature.properties['Var'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Name'] !== null ? autolinker.link(feature.properties['Reg_Name'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Muncode'] !== null ? autolinker.link(feature.properties['Muncode'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Region_XI_2_0() {
-            return {
-                pane: 'pane_Region_XI_2',
+        function style_FloodMapSulop_1_0(feature) {
+            switch(String(feature.properties['Var'])) {
+                case '1':
+                    return {
+                pane: 'pane_FloodMapSulop_1',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -162,57 +112,13 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(190,207,80,1.0)',
+                fillColor: 'rgba(234,254,50,1.0)',
                 interactive: true,
             }
-        }
-        map.createPane('pane_Region_XI_2');
-        map.getPane('pane_Region_XI_2').style.zIndex = 402;
-        map.getPane('pane_Region_XI_2').style['mix-blend-mode'] = 'normal';
-        var layer_Region_XI_2 = new L.geoJson(json_Region_XI_2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Region_XI_2',
-            layerName: 'layer_Region_XI_2',
-            pane: 'pane_Region_XI_2',
-            onEachFeature: pop_Region_XI_2,
-            style: style_Region_XI_2_0,
-        });
-        bounds_group.addLayer(layer_Region_XI_2);
-        map.addLayer(layer_Region_XI_2);
-        function pop_Province_DavaodelSur_3(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Code'] !== null ? autolinker.link(feature.properties['Reg_Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Name'] !== null ? autolinker.link(feature.properties['Reg_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Pro_Code'] !== null ? autolinker.link(feature.properties['Pro_Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Pro_Name'] !== null ? autolinker.link(feature.properties['Pro_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Province_DavaodelSur_3_0() {
-            return {
-                pane: 'pane_Province_DavaodelSur_3',
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_FloodMapSulop_1',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -221,25 +127,42 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(231,113,72,1.0)',
+                fillColor: 'rgba(233,160,57,1.0)',
                 interactive: true,
             }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_FloodMapSulop_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
         }
-        map.createPane('pane_Province_DavaodelSur_3');
-        map.getPane('pane_Province_DavaodelSur_3').style.zIndex = 403;
-        map.getPane('pane_Province_DavaodelSur_3').style['mix-blend-mode'] = 'normal';
-        var layer_Province_DavaodelSur_3 = new L.geoJson(json_Province_DavaodelSur_3, {
+        map.createPane('pane_FloodMapSulop_1');
+        map.getPane('pane_FloodMapSulop_1').style.zIndex = 401;
+        map.getPane('pane_FloodMapSulop_1').style['mix-blend-mode'] = 'normal';
+        var layer_FloodMapSulop_1 = new L.geoJson(json_FloodMapSulop_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Province_DavaodelSur_3',
-            layerName: 'layer_Province_DavaodelSur_3',
-            pane: 'pane_Province_DavaodelSur_3',
-            onEachFeature: pop_Province_DavaodelSur_3,
-            style: style_Province_DavaodelSur_3_0,
+            dataVar: 'json_FloodMapSulop_1',
+            layerName: 'layer_FloodMapSulop_1',
+            pane: 'pane_FloodMapSulop_1',
+            onEachFeature: pop_FloodMapSulop_1,
+            style: style_FloodMapSulop_1_0,
         });
-        bounds_group.addLayer(layer_Province_DavaodelSur_3);
-        map.addLayer(layer_Province_DavaodelSur_3);
-        function pop_Buildings_Sulop_4(feature, layer) {
+        bounds_group.addLayer(layer_FloodMapSulop_1);
+        map.addLayer(layer_FloodMapSulop_1);
+        function pop_Buildings_Sulop_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -254,9 +177,9 @@
             });
         }
 
-        function style_Buildings_Sulop_4_0() {
+        function style_Buildings_Sulop_2_0() {
             return {
-                pane: 'pane_Buildings_Sulop_4',
+                pane: 'pane_Buildings_Sulop_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -269,21 +192,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Buildings_Sulop_4');
-        map.getPane('pane_Buildings_Sulop_4').style.zIndex = 404;
-        map.getPane('pane_Buildings_Sulop_4').style['mix-blend-mode'] = 'normal';
-        var layer_Buildings_Sulop_4 = new L.geoJson(json_Buildings_Sulop_4, {
+        map.createPane('pane_Buildings_Sulop_2');
+        map.getPane('pane_Buildings_Sulop_2').style.zIndex = 402;
+        map.getPane('pane_Buildings_Sulop_2').style['mix-blend-mode'] = 'normal';
+        var layer_Buildings_Sulop_2 = new L.geoJson(json_Buildings_Sulop_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Buildings_Sulop_4',
-            layerName: 'layer_Buildings_Sulop_4',
-            pane: 'pane_Buildings_Sulop_4',
-            onEachFeature: pop_Buildings_Sulop_4,
-            style: style_Buildings_Sulop_4_0,
+            dataVar: 'json_Buildings_Sulop_2',
+            layerName: 'layer_Buildings_Sulop_2',
+            pane: 'pane_Buildings_Sulop_2',
+            onEachFeature: pop_Buildings_Sulop_2,
+            style: style_Buildings_Sulop_2_0,
         });
-        bounds_group.addLayer(layer_Buildings_Sulop_4);
-        map.addLayer(layer_Buildings_Sulop_4);
-        function pop_RoadNetworks_Sulop_5(feature, layer) {
+        bounds_group.addLayer(layer_Buildings_Sulop_2);
+        map.addLayer(layer_Buildings_Sulop_2);
+        function pop_RoadNetworks_Sulop_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -310,15 +233,15 @@
                         <td colspan="2">' + (feature.properties['Code'] !== null ? autolinker.link(feature.properties['Code'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Length</strong><br />' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_RoadNetworks_Sulop_5_0() {
+        function style_RoadNetworks_Sulop_3_0() {
             return {
-                pane: 'pane_RoadNetworks_Sulop_5',
+                pane: 'pane_RoadNetworks_Sulop_3',
                 opacity: 1,
                 color: 'rgba(243,166,178,1.0)',
                 dashArray: '',
@@ -329,21 +252,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_RoadNetworks_Sulop_5');
-        map.getPane('pane_RoadNetworks_Sulop_5').style.zIndex = 405;
-        map.getPane('pane_RoadNetworks_Sulop_5').style['mix-blend-mode'] = 'normal';
-        var layer_RoadNetworks_Sulop_5 = new L.geoJson(json_RoadNetworks_Sulop_5, {
+        map.createPane('pane_RoadNetworks_Sulop_3');
+        map.getPane('pane_RoadNetworks_Sulop_3').style.zIndex = 403;
+        map.getPane('pane_RoadNetworks_Sulop_3').style['mix-blend-mode'] = 'normal';
+        var layer_RoadNetworks_Sulop_3 = new L.geoJson(json_RoadNetworks_Sulop_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_RoadNetworks_Sulop_5',
-            layerName: 'layer_RoadNetworks_Sulop_5',
-            pane: 'pane_RoadNetworks_Sulop_5',
-            onEachFeature: pop_RoadNetworks_Sulop_5,
-            style: style_RoadNetworks_Sulop_5_0,
+            dataVar: 'json_RoadNetworks_Sulop_3',
+            layerName: 'layer_RoadNetworks_Sulop_3',
+            pane: 'pane_RoadNetworks_Sulop_3',
+            onEachFeature: pop_RoadNetworks_Sulop_3,
+            style: style_RoadNetworks_Sulop_3_0,
         });
-        bounds_group.addLayer(layer_RoadNetworks_Sulop_5);
-        map.addLayer(layer_RoadNetworks_Sulop_5);
-        function pop_Waterbodies_Sulop_6(feature, layer) {
+        bounds_group.addLayer(layer_RoadNetworks_Sulop_3);
+        map.addLayer(layer_RoadNetworks_Sulop_3);
+        function pop_Waterbodies_Sulop_4(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -370,9 +293,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Waterbodies_Sulop_6_0() {
+        function style_Waterbodies_Sulop_4_0() {
             return {
-                pane: 'pane_Waterbodies_Sulop_6',
+                pane: 'pane_Waterbodies_Sulop_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -381,425 +304,25 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(164,113,88,1.0)',
+                fillColor: 'rgba(90,230,232,1.0)',
                 interactive: true,
             }
         }
-        map.createPane('pane_Waterbodies_Sulop_6');
-        map.getPane('pane_Waterbodies_Sulop_6').style.zIndex = 406;
-        map.getPane('pane_Waterbodies_Sulop_6').style['mix-blend-mode'] = 'normal';
-        var layer_Waterbodies_Sulop_6 = new L.geoJson(json_Waterbodies_Sulop_6, {
+        map.createPane('pane_Waterbodies_Sulop_4');
+        map.getPane('pane_Waterbodies_Sulop_4').style.zIndex = 404;
+        map.getPane('pane_Waterbodies_Sulop_4').style['mix-blend-mode'] = 'normal';
+        var layer_Waterbodies_Sulop_4 = new L.geoJson(json_Waterbodies_Sulop_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Waterbodies_Sulop_6',
-            layerName: 'layer_Waterbodies_Sulop_6',
-            pane: 'pane_Waterbodies_Sulop_6',
-            onEachFeature: pop_Waterbodies_Sulop_6,
-            style: style_Waterbodies_Sulop_6_0,
+            dataVar: 'json_Waterbodies_Sulop_4',
+            layerName: 'layer_Waterbodies_Sulop_4',
+            pane: 'pane_Waterbodies_Sulop_4',
+            onEachFeature: pop_Waterbodies_Sulop_4,
+            style: style_Waterbodies_Sulop_4_0,
         });
-        bounds_group.addLayer(layer_Waterbodies_Sulop_6);
-        map.addLayer(layer_Waterbodies_Sulop_6);
-        function pop_DavaoCity_Brgys_7(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Code'] !== null ? autolinker.link(feature.properties['Reg_Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Name'] !== null ? autolinker.link(feature.properties['Reg_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Pro_Code'] !== null ? autolinker.link(feature.properties['Pro_Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Pro_Name'] !== null ? autolinker.link(feature.properties['Pro_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Mun_Code'] !== null ? autolinker.link(feature.properties['Mun_Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Mun_Name'] !== null ? autolinker.link(feature.properties['Mun_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Bgy_Code'] !== null ? autolinker.link(feature.properties['Bgy_Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Bgy_Name'] !== null ? autolinker.link(feature.properties['Bgy_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_DavaoCity_Brgys_7_0() {
-            return {
-                pane: 'pane_DavaoCity_Brgys_7',
-                opacity: 1,
-                color: 'rgba(255,255,255,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 1.0,
-                fillOpacity: 0,
-                interactive: true,
-            }
-        }
-        map.createPane('pane_DavaoCity_Brgys_7');
-        map.getPane('pane_DavaoCity_Brgys_7').style.zIndex = 407;
-        map.getPane('pane_DavaoCity_Brgys_7').style['mix-blend-mode'] = 'normal';
-        var layer_DavaoCity_Brgys_7 = new L.geoJson(json_DavaoCity_Brgys_7, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_DavaoCity_Brgys_7',
-            layerName: 'layer_DavaoCity_Brgys_7',
-            pane: 'pane_DavaoCity_Brgys_7',
-            onEachFeature: pop_DavaoCity_Brgys_7,
-            style: style_DavaoCity_Brgys_7_0,
-        });
-        bounds_group.addLayer(layer_DavaoCity_Brgys_7);
-        map.addLayer(layer_DavaoCity_Brgys_7);
-        function pop_Waterbodies_DavaoCity_8(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Water_Name'] !== null ? autolinker.link(feature.properties['Water_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Code'] !== null ? autolinker.link(feature.properties['Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Waterbodies_DavaoCity_8_0() {
-            return {
-                pane: 'pane_Waterbodies_DavaoCity_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(145,82,45,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Waterbodies_DavaoCity_8');
-        map.getPane('pane_Waterbodies_DavaoCity_8').style.zIndex = 408;
-        map.getPane('pane_Waterbodies_DavaoCity_8').style['mix-blend-mode'] = 'normal';
-        var layer_Waterbodies_DavaoCity_8 = new L.geoJson(json_Waterbodies_DavaoCity_8, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Waterbodies_DavaoCity_8',
-            layerName: 'layer_Waterbodies_DavaoCity_8',
-            pane: 'pane_Waterbodies_DavaoCity_8',
-            onEachFeature: pop_Waterbodies_DavaoCity_8,
-            style: style_Waterbodies_DavaoCity_8_0,
-        });
-        bounds_group.addLayer(layer_Waterbodies_DavaoCity_8);
-        map.addLayer(layer_Waterbodies_DavaoCity_8);
-        function pop_RoadNetworks_DavaoCity_9(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Road_Name'] !== null ? autolinker.link(feature.properties['Road_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Lanes'] !== null ? autolinker.link(feature.properties['Lanes'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Code'] !== null ? autolinker.link(feature.properties['Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_RoadNetworks_DavaoCity_9_0() {
-            return {
-                pane: 'pane_RoadNetworks_DavaoCity_9',
-                opacity: 1,
-                color: 'rgba(229,182,54,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 1.0,
-                fillOpacity: 0,
-                interactive: true,
-            }
-        }
-        map.createPane('pane_RoadNetworks_DavaoCity_9');
-        map.getPane('pane_RoadNetworks_DavaoCity_9').style.zIndex = 409;
-        map.getPane('pane_RoadNetworks_DavaoCity_9').style['mix-blend-mode'] = 'normal';
-        var layer_RoadNetworks_DavaoCity_9 = new L.geoJson(json_RoadNetworks_DavaoCity_9, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_RoadNetworks_DavaoCity_9',
-            layerName: 'layer_RoadNetworks_DavaoCity_9',
-            pane: 'pane_RoadNetworks_DavaoCity_9',
-            onEachFeature: pop_RoadNetworks_DavaoCity_9,
-            style: style_RoadNetworks_DavaoCity_9_0,
-        });
-        bounds_group.addLayer(layer_RoadNetworks_DavaoCity_9);
-        map.addLayer(layer_RoadNetworks_DavaoCity_9);
-        function pop_Buildings_DavaoCity_10(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Bldg_Name'] !== null ? autolinker.link(feature.properties['Bldg_Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Code'] !== null ? autolinker.link(feature.properties['Code'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['MIN'] !== null ? autolinker.link(feature.properties['MIN'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['MAX'] !== null ? autolinker.link(feature.properties['MAX'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['MEAN'] !== null ? autolinker.link(feature.properties['MEAN'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Bldg_Area'] !== null ? autolinker.link(feature.properties['Bldg_Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Remarks'] !== null ? autolinker.link(feature.properties['Remarks'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Buildings_DavaoCity_10_0() {
-            return {
-                pane: 'pane_Buildings_DavaoCity_10',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(152,125,183,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Buildings_DavaoCity_10');
-        map.getPane('pane_Buildings_DavaoCity_10').style.zIndex = 410;
-        map.getPane('pane_Buildings_DavaoCity_10').style['mix-blend-mode'] = 'normal';
-        var layer_Buildings_DavaoCity_10 = new L.geoJson(json_Buildings_DavaoCity_10, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Buildings_DavaoCity_10',
-            layerName: 'layer_Buildings_DavaoCity_10',
-            pane: 'pane_Buildings_DavaoCity_10',
-            onEachFeature: pop_Buildings_DavaoCity_10,
-            style: style_Buildings_DavaoCity_10_0,
-        });
-        bounds_group.addLayer(layer_Buildings_DavaoCity_10);
-        map.addLayer(layer_Buildings_DavaoCity_10);
-        function pop_Bridges_DavaoCity_11(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Bridge_Nam'] !== null ? autolinker.link(feature.properties['Bridge_Nam'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Elevation'] !== null ? autolinker.link(feature.properties['Elevation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Remarks'] !== null ? autolinker.link(feature.properties['Remarks'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Bridges_DavaoCity_11_0(feature) {
-            switch(String(feature.properties['Bridge_Nam'])) {
-                case 'Tamugan Bridge':
-                    return {
-                pane: 'pane_Bridges_DavaoCity_11',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(232,101,96,1.0)',
-                interactive: true,
-            }
-                    break;
-            }
-        }
-        map.createPane('pane_Bridges_DavaoCity_11');
-        map.getPane('pane_Bridges_DavaoCity_11').style.zIndex = 411;
-        map.getPane('pane_Bridges_DavaoCity_11').style['mix-blend-mode'] = 'normal';
-        var layer_Bridges_DavaoCity_11 = new L.geoJson(json_Bridges_DavaoCity_11, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Bridges_DavaoCity_11',
-            layerName: 'layer_Bridges_DavaoCity_11',
-            pane: 'pane_Bridges_DavaoCity_11',
-            onEachFeature: pop_Bridges_DavaoCity_11,
-            style: style_Bridges_DavaoCity_11_0,
-        });
-        bounds_group.addLayer(layer_Bridges_DavaoCity_11);
-        map.addLayer(layer_Bridges_DavaoCity_11);
-        function pop_Photos_12(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    if (typeof layer.closePopup == 'function') {
-                        layer.closePopup();
-                    } else {
-                        layer.eachLayer(function(feature){
-                            feature.closePopup()
-                        });
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['photo'] !== null ? '<img src="images/' + String(feature.properties['photo']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['filename'] !== null ? autolinker.link(feature.properties['filename'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['directory'] !== null ? '<img src="images/' + String(feature.properties['directory']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['altitude'] !== null ? autolinker.link(feature.properties['altitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['direction'] !== null ? autolinker.link(feature.properties['direction'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['rotation'] !== null ? autolinker.link(feature.properties['rotation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['longitude'] !== null ? autolinker.link(feature.properties['longitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['latitude'] !== null ? autolinker.link(feature.properties['latitude'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? autolinker.link(feature.properties['timestamp'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_Photos_12_0() {
-            return {
-                pane: 'pane_Photos_12',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(15,27,255,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_Photos_12');
-        map.getPane('pane_Photos_12').style.zIndex = 412;
-        map.getPane('pane_Photos_12').style['mix-blend-mode'] = 'normal';
-        var layer_Photos_12 = new L.geoJson(json_Photos_12, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_Photos_12',
-            layerName: 'layer_Photos_12',
-            pane: 'pane_Photos_12',
-            onEachFeature: pop_Photos_12,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Photos_12_0(feature));
-            },
-        });
-        bounds_group.addLayer(layer_Photos_12);
-        map.addLayer(layer_Photos_12);
-        function pop_Geotag_Photos_13(feature, layer) {
+        bounds_group.addLayer(layer_Waterbodies_Sulop_4);
+        map.addLayer(layer_Waterbodies_Sulop_4);
+        function pop_Geotag_Photos_5(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     if (typeof layer.closePopup == 'function') {
@@ -823,9 +346,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Geotag_Photos_13_0() {
+        function style_Geotag_Photos_5_0() {
             return {
-                pane: 'pane_Geotag_Photos_13',
+                pane: 'pane_Geotag_Photos_5',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -839,52 +362,29 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Geotag_Photos_13');
-        map.getPane('pane_Geotag_Photos_13').style.zIndex = 413;
-        map.getPane('pane_Geotag_Photos_13').style['mix-blend-mode'] = 'normal';
-        var layer_Geotag_Photos_13 = new L.geoJson(json_Geotag_Photos_13, {
+        map.createPane('pane_Geotag_Photos_5');
+        map.getPane('pane_Geotag_Photos_5').style.zIndex = 405;
+        map.getPane('pane_Geotag_Photos_5').style['mix-blend-mode'] = 'normal';
+        var layer_Geotag_Photos_5 = new L.geoJson(json_Geotag_Photos_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Geotag_Photos_13',
-            layerName: 'layer_Geotag_Photos_13',
-            pane: 'pane_Geotag_Photos_13',
-            onEachFeature: pop_Geotag_Photos_13,
+            dataVar: 'json_Geotag_Photos_5',
+            layerName: 'layer_Geotag_Photos_5',
+            pane: 'pane_Geotag_Photos_5',
+            onEachFeature: pop_Geotag_Photos_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Geotag_Photos_13_0(feature));
+                return L.circleMarker(latlng, style_Geotag_Photos_5_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Geotag_Photos_13);
-        map.addLayer(layer_Geotag_Photos_13);
+        bounds_group.addLayer(layer_Geotag_Photos_5);
+        map.addLayer(layer_Geotag_Photos_5);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Geotag_Photos_13.png" /> Geotag_Photos': layer_Geotag_Photos_13,'<img src="legend/Photos_12.png" /> Photos': layer_Photos_12,'Bridges_Davao City<br /><table><tr><td style="text-align: center;"><img src="legend/Bridges_DavaoCity_11_TamuganBridge0.png" /></td><td>Tamugan Bridge</td></tr></table>': layer_Bridges_DavaoCity_11,'<img src="legend/Buildings_DavaoCity_10.png" /> Buildings_Davao City': layer_Buildings_DavaoCity_10,'<img src="legend/RoadNetworks_DavaoCity_9.png" /> RoadNetworks_Davao City': layer_RoadNetworks_DavaoCity_9,'<img src="legend/Waterbodies_DavaoCity_8.png" /> Waterbodies_Davao City': layer_Waterbodies_DavaoCity_8,'<img src="legend/DavaoCity_Brgys_7.png" /> Davao City_Brgys': layer_DavaoCity_Brgys_7,'<img src="legend/Waterbodies_Sulop_6.png" /> Waterbodies_Sulop': layer_Waterbodies_Sulop_6,'<img src="legend/RoadNetworks_Sulop_5.png" /> RoadNetworks_Sulop': layer_RoadNetworks_Sulop_5,'<img src="legend/Buildings_Sulop_4.png" /> Buildings_Sulop': layer_Buildings_Sulop_4,'<img src="legend/Province_DavaodelSur_3.png" /> Province_Davao del Sur': layer_Province_DavaodelSur_3,'<img src="legend/Region_XI_2.png" /> Region_XI': layer_Region_XI_2,'<img src="legend/ph112414000_fh5yr_10m_1.png" /> ph112414000_fh5yr_10m': layer_ph112414000_fh5yr_10m_1,"Google Terrain Hybrid": layer_GoogleTerrainHybrid_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/Geotag_Photos_5.png" /> Geotag_Photos': layer_Geotag_Photos_5,'<img src="legend/Waterbodies_Sulop_4.png" /> Waterbodies_Sulop': layer_Waterbodies_Sulop_4,'<img src="legend/RoadNetworks_Sulop_3.png" /> RoadNetworks_Sulop': layer_RoadNetworks_Sulop_3,'<img src="legend/Buildings_Sulop_2.png" /> Buildings_Sulop': layer_Buildings_Sulop_2,'Flood Map Sulop<br /><table><tr><td style="text-align: center;"><img src="legend/FloodMapSulop_1_Low0.png" /></td><td>Low</td></tr><tr><td style="text-align: center;"><img src="legend/FloodMapSulop_1_Medium1.png" /></td><td>Medium</td></tr><tr><td style="text-align: center;"><img src="legend/FloodMapSulop_1_High2.png" /></td><td>High</td></tr></table>': layer_FloodMapSulop_1,"Google Terrain Hybrid": layer_GoogleTerrainHybrid_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
         setBounds();
-        var i = 0;
-        layer_DavaoCity_Brgys_7.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['Bgy_Name'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial Narrow\', sans-serif;">' + layer.feature.properties['Bgy_Name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_DavaoCity_Brgys_7'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
-        resetLabels([layer_DavaoCity_Brgys_7]);
-        map.on("zoomend", function(){
-            resetLabels([layer_DavaoCity_Brgys_7]);
-        });
-        map.on("layeradd", function(){
-            resetLabels([layer_DavaoCity_Brgys_7]);
-        });
-        map.on("layerremove", function(){
-            resetLabels([layer_DavaoCity_Brgys_7]);
-        });
         </script>
     </body>
 </html>
